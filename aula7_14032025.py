@@ -21,5 +21,8 @@ i = 1
 while i <= 10:
     print (numero, "x",i,"=", numero *1)
     i += 1
-
-     
+ 
+ 
+numero = int(input("digite seu numero:"))
+for i in range(2, numero + 1, 2):
+    print(i)
