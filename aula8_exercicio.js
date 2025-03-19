@@ -1,46 +1,72 @@
 
-const readline = require('readline');
+function calcularMedia() {
+    let soma = 0;
+    for (let i = 0; i < 4; i++) {
+        let nota = parseFloat(prompt(`Digite a ${i + 1}ª nota:`));
+        soma += nota;
+    }
+    let media = soma / 4;
+    console.log("Média:", media);
+    if (media >= 7) {
+        console.log("Aprovado");
+    } else {
+        console.log("Reprovado");
+    }
+}
 
-const rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout
-});
-
-
-function notas(n1,n2,n3,n4) {
-    let medianota = (n1 + n2 + n3 + n4)/ 4;
-    if ( medianota > 7 ) {
-        return "aprovado";
-     } else if (medianota >= 5 && medianota < 7) {
-        return " recuperacao";
-     } else {
-        return "reprovado";
-     } 
-} 
-     
-rl.question("Digite a primeira nota:", (nota1) => {
-    rl.question("Digite a segunda nota:", (nota2) => {
-        rl.question("Digite a terceira nota:", (nota3) => {
-            rl.question("Digite a quarta nota:", (nota4) => {
-                nota1 = parseFloat(nota1);
-                nota2 = parseFloat(nota2);
-                nota3 = parseFloat(nota3);
-                nota4 = parseFloat(nota4);
-
-                let resultado = notas(nota1, nota2, nota3, nota4);
-                console.log("Classificação das notas: ", resultado);
-
-                rl.close();
-            });
-        });
-    });
-});
+calcularMedia(); 
 
 
+function somaParesNoIntervalo() {
+    let inicio = parseInt(prompt("Digite o início do intervalo:"));
+    let fim = parseInt(prompt("Digite o fim do intervalo:"));
+    let soma = 0;
+    for (let i = inicio; i <= fim; i++) {
+        if (i % 2 === 0) {
+            soma += i;
+        }
+    }
+    console.log("Soma dos números pares:", soma);
+}
 
-const readline = require('readline');
+somaParesNoIntervalo();
 
-const r2 = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout
-});
+
+function verificarPalindromo() {
+    let texto = prompt("Digite uma palavra ou frase:").toLowerCase().replace(/ /g, "");
+    let textoInvertido = texto.split("").reverse().join("");
+    if (texto === textoInvertido) {
+        console.log("É palíndromo");
+    } else {
+        console.log("Não é palíndromo");
+    }
+}
+
+
+verificarPalindromo
+
+
+function calcularJurosSimples() {
+    let P = parseFloat(prompt("Digite o valor principal (P):"));
+    let r = parseFloat(prompt("Digite a taxa de juros anual (r):")) / 100;
+    let t = parseFloat(prompt("Digite o tempo em anos (t):"));
+    let M = P * (1 + r * t);
+    console.log("Montante final:", M);
+}
+
+
+calcularJurosSimples();
+
+
+
+function contarDigitos() {
+    let numero = prompt("Digite um número inteiro positivo:");
+    if (/^\d+$/.test(numero)) {
+        console.log("Número de dígitos:", numero.length);
+    } else {
+        console.log("Entrada inválida. Digite um número inteiro positivo.");
+    }
+}
+
+
+contarDigitos();
