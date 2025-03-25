@@ -4,52 +4,52 @@ class Hotel {
         this.nomeHotel = nomeHotel;
         this.cidade = cidade;
         this.quartosDisponiveisHotel = quartosDisponiveisHotel;
-        this.historicoReservas = []; // Lista para armazenar as reservas feitas
+        this.historicoReservas = []; 
     }
 
     reservarQuarto(cliente) {
-        // Verifica se há quartos disponíveis
+        
         if (this.quartosDisponiveisHotel > 0) {
-            this.quartosDisponiveisHotel--; // Diminui o número de quartos disponíveis
-            // Adiciona a reserva ao histórico do cliente
+            this.quartosDisponiveisHotel--; 
+            
             this.historicoReservas.push({
                 cliente: cliente.nomeCliente,
                 cpf: cliente.cpfCliente,
-                data: new Date().toLocaleString() // Registra a data da reserva
+                data: new Date().toLocaleString() 
             });
             console.log(`Reserva confirmada para ${cliente.nomeCliente} no ${this.nomeHotel}.`);
-            return true; // Retorna verdadeiro para indicar que a reserva foi bem-sucedida
+            return true; 
         } else {
             console.log("Não foi possível realizar a reserva. Quartos indisponíveis.");
-            return false; // Retorna falso se não houver quartos disponíveis
+            return false;
         }
     }
 
     cancelarReserva(cliente) {
-        // A lógica de cancelamento não está implementada, mas uma possível implementação poderia ser aqui
-        // Para simplificação, você precisaria armazenar quando estava reservando e como cancelar.
+        
+    
         console.log(`Reserva cancelada para ${cliente.nomeCliente}.`);
-        this.quartosDisponiveisHotel++; // Adiciona um quarto de volta
-        // Aqui você deve remover a reserva do histórico do hotel
+        this.quartosDisponiveisHotel++; 
+        
     }
 }
 class Cliente {
     constructor(nomeCliente, cpfCliente) {
         this.nomeCliente = nomeCliente;
         this.cpfCliente = cpfCliente;
-        this.historicoReservas = []; // Inicializa uma lista vazia para o histórico de reservas
+        this.historicoReservas = []; 
     }
 
     adicionarReserva(hotel) {
-        // Este método adiciona uma reserva ao histórico do cliente
+        
         this.historicoReservas.push({
             hotel: hotel.nomeHotel,
-            data: new Date().toLocaleString() // Registra a data da reserva
+            data: new Date().toLocaleString() 
         });
     }
 
     visualizarHistorico() {
-        // Método para visualizar o histórico de reservas do cliente
+        
         console.log(`Histórico de Reservas de ${this.nomeCliente}:`);
         if (this.historicoReservas.length === 0) {
             console.log("Nenhuma reserva encontrada.");
@@ -61,14 +61,13 @@ class Cliente {
     }
 }
 
-// Exemplo de uso
+
 const hotel1 = new Hotel("Hotel cristo vive", "Rio de Janeiro");
 const cliente1 = new Cliente("alyfer mateus", "232.455.789-22");
 
-// O cliente tenta reservar um quarto
+
 if (hotel1.reservarQuarto(cliente1)) {
-    cliente1.adicionarReserva(hotel1); // Adiciona a reserva ao histórico do cliente
+    cliente1.adicionarReserva(hotel1); 
 }
 
-// O cliente visualiza seu histórico de reservas
 cliente1.visualizarHistorico();
