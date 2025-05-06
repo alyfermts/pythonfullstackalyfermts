@@ -36,3 +36,39 @@ Listar colaboradores com salário acima de X.
 '''
 #Implemente utilizando funções.
 
+
+colaboradores = []
+def adicionar_colaborador(lista, id, nome, salario):
+    colaborador = {
+        "id": id,
+        "nome": nome,
+        "salario": salario
+    }
+    lista.append(colaborador)
+
+def buscar_por_id(lista, id):
+    for colaborador in lista:
+        if colaborador["id"] == id:
+            return colaborador
+    return None 
+
+def listar_acima_de_salario(lista, salario_minimo):
+    acima = []
+    for colaborador in lista:
+        if colaborador["salario"] > salario_minimo:
+            acima.append(colaborador)
+    return acima
+
+adicionar_colaborador(colaboradores, 1, "Carlos", 3500)
+adicionar_colaborador(colaboradores, 2, "Ana", 4200)
+adicionar_colaborador(colaboradores, 3, "Bruno", 2900)
+
+resultado = buscar_por_id(colaboradores, 2)
+print("Buscar por ID 2:", resultado)
+
+print("Colaboradores com salário acima de R$ 3000:")
+acima_3000 = listar_acima_de_salario(colaboradores, 3000)
+for c in acima_3000:
+    print(c)
+#Implemente utilizando funções.
+
