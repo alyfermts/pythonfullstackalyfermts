@@ -5,7 +5,7 @@ def calculadora():
         '+': lambda x, y: x + y,
         '-': lambda x, y: x - y,
         '*': lambda x, y: x * y,
-        '/': lambda x, y: x / y,
+        '/': lambda x, y: x / y, 
         '^': lambda x, y: x ** y,
         '√': lambda x: math.sqrt(x),
         'sen': lambda x: math.sin(math.radians(x)),
