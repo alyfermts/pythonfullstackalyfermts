@@ -71,6 +71,22 @@ class Gato(Animal):
 
     def miar(self):
         return f"{self.nome} está miando!"
+    
+
+    
+if __name__ == "__main__":
+    cachorro = Cachorro("dilsinho", "frajola")
+    gato = Gato("Mel", "mia")
+
+    print(cachorro.brincar())   
+    print(cachorro.comer())    
+    print(cachorro.latir())     
+
+    print(gato.brincar())       
+    print(gato.comer())        
+    print(gato.miar())          
+
+
 
 
 
@@ -172,8 +188,8 @@ print("\nBuscando usuário por email 'alyferlindo@gmail.com' ")
 print(repo.buscar_por_email('alyferlindo@gmail.com'))
 
 # Atualizar um usuário
-print("\n Atualizando o usuário 'João' para 'João Pedro' ")
-repo.atualizar({'nome': 'João Pedro', 'email': 'jpmaluco@gmail.com'})
+print("\n Atualizando o usuário 'jota' para 'jota fernandes' ")
+repo.atualizar({'nome': 'jota fernandes', 'email': 'jotinha@gmail.com'})
 print(repo.listar_todos())
 
 # Remover um usuário
@@ -200,4 +216,160 @@ print(repo.listar_por_nome_e_email('paulo', 'paulofg@gmail.com'))
 
 
 
+
 # 4. DESAFIO: retorne às atividades 2 e 3 e implemente uma metaclasse dentro de seus respectivos contextos.
+
+
+class AnimalMeta(type):
+     def __new__(cls, name, bases, dct):
+        if name != "Animal" and not all(method in dct for method in ["brincar", "comer"]):
+            raise TypeError(f"A classe {name} precisa implementar os métodos 'brincar' e 'comer'.")
+        return super().__new__(cls, name, bases, dct)
+
+
+
+class Animal(metaclass=AnimalMeta):
+    def __init__(self, nome, raca):
+        self.nome = nome
+        self.raca = raca
+
+    def brincar(self):
+        return f"{self.nome} está brincando."
+
+    def comer(self):
+        return f"{self.nome} está comendo."
+
+
+
+class Cachorro(Animal):
+    def brincar(self):
+        return f"{self.nome} está brincando!"
+
+    def comer(self):
+        return f"{self.nome} está comendo ração para cães."
+
+
+class Gato(Animal):
+    def brincar(self):
+        return f"{self.nome} está brincando com um novelo de lã!"
+
+    def comer(self):
+        return f"{self.nome} está comendo ração para gatos."
+
+
+
+if __name__ == "__main__":
+    cachorro = Cachorro("dilsinho", "frajola")
+    gato = Gato("mel", "mia")
+
+    print(cachorro.brincar())  
+    print(cachorro.comer())    
+    print(gato.brincar())     
+    print(gato.comer())        
+
+
+
+
+
+class RepositoryMeta(type):
+    def __new__(cls, name, bases, dct):
+        required_methods = ['cadastrar', 'listar_todos', 'remover', 'atualizar', 'listar_por_nome', 'listar_por_email', 'listar_por_nome_e_email']
+        
+        
+        for method in required_methods:
+            if method not in dct:
+                raise TypeError(f"A classe {name} precisa implementar o método '{method}'")
+        
+        
+        return super().__new__(cls, name, bases, dct)
+
+
+
+class UsuarioRepository(metaclass=RepositoryMeta):
+    def __init__(self):
+        self.usuarios = []
+
+    def cadastrar(self, usuario):
+        self.usuarios.append(usuario)
+
+    def listar_todos(self):
+        return self.usuarios
+
+    def buscar_por_email(self, email):
+        for usuario in self.usuarios:
+            if usuario['email'] == email:
+                return usuario
+        return None
+
+    def remover(self, email):
+        for usuario in self.usuarios:
+            if usuario['email'] == email:
+                self.usuarios.remove(usuario)
+                return
+        print("Usuário não encontrado.")
+
+    def atualizar(self, usuario):
+        for i in range(len(self.usuarios)):
+            if self.usuarios[i]['email'] == usuario['email']:
+                self.usuarios[i] = usuario
+                return
+        print("Usuário não encontrado.")
+
+    def listar_por_nome(self, nome):
+        usuarios_com_nome = []
+        for usuario in self.usuarios:
+            if usuario['nome'] == nome:
+                usuarios_com_nome.append(usuario)
+        return usuarios_com_nome
+
+    def listar_por_email(self, email):
+        usuarios_com_email = []
+        for usuario in self.usuarios:
+            if usuario['email'] == email:
+                usuarios_com_email.append(usuario)
+        return usuarios_com_email
+
+    def listar_por_nome_e_email(self, nome, email):
+        usuarios_com_nome_email = []
+        for usuario in self.usuarios:
+            if usuario['nome'] == nome and usuario['email'] == email:
+                usuarios_com_nome_email.append(usuario)
+        return usuarios_com_nome_email
+
+
+
+repo = UsuarioRepository()
+
+
+repo.cadastrar({'nome': 'paulo', 'email': 'paulofg@gmail.com'})
+repo.cadastrar({'nome': 'Alyfer', 'email': 'alyferlindo@gmail.com'})
+repo.cadastrar({'nome': 'João', 'email': 'jota@gmail.com'})
+
+
+print("\n Todos os usuários cadastrados ")
+print(repo.listar_todos())
+
+print("\nBuscando usuário por email 'alyferlindo@gmail.com' ")
+print(repo.buscar_por_email('alyferlindo@gmail.com'))
+
+
+print("\n Atualizando o usuário 'jota' para 'jota' ")
+repo.atualizar({'nome': 'jota fernandes', 'email': 'jotinha@gmail.com'})
+print(repo.listar_todos())
+
+
+print("\n Removendo o usuário 'Alyfer' ")
+repo.remover('alyferlindo@gmail.com')
+print(repo.listar_todos())
+
+
+print("\n Listando usuários com nome 'jota fernandes'")
+print(repo.listar_por_nome('jota fernandes'))
+
+
+print("\n Listando usuários com email 'jotinha@gmail.com' ")
+print(repo.listar_por_email('jotinha@gmail.com'))
+
+
+print("\n Listando usuários com nome 'paulo' e email 'paulofg@gmail.com' ")
+print(repo.listar_por_nome_e_email('paulo', 'paulofg@gmail.com'))
