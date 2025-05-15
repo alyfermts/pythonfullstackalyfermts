@@ -17,29 +17,16 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path
-from app01.views import home
-from app01.views import franquia
-from app01.views import faleconosco
+from app01.views import home, produtos, contatos
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', home),
-    path('', franquia),
-    path('', faleconosco),
+    path('', home, name='home'),
+    path('produtos/', produtos,name='produtos'),
+    path('contatos/', contatos,name='contatos'),
 ]
 
 
 
 
-from django.contrib import admin
-from django.urls import path
-from app02.views import home
-from app02.views import franquia
-from app02.views import faleconosco
 
-urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', home),
-    path('', franquia),
-    path('', faleconosco),
-]
