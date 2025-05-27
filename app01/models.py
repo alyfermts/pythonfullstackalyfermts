@@ -11,7 +11,7 @@ class Produto(models.Model):
     '''
     nome = models.CharField(max_length=100)
     imagem = models.ImageField(
-        upload_to='produtos/',
+        upload_to='produtos/profile_pics',
         blank=True,
         null=True
     )
