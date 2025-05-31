@@ -1,9 +1,10 @@
 from django.shortcuts import render, redirect
 from django.db import models
 from .models import Produto
-from .forms import ProdutoForm, ProfileForm
+from .forms import ProdutoForm, ProfileForm, ContatoForm
 from django.conf import settings
 import os
+from django.contrib import messages
 
 def home(request):
     return render(request, 'app01/home.html')
@@ -57,3 +58,15 @@ def upload_profile(request):
     else:
         form = ProfileForm()
     return render(request, 'app01/upload_profile.html', {'form': form})
+
+def contatos(request):
+    if request.method == 'POST':
+        form = ContatoForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Mensagem enviada com sucesso!')
+            return redirect('contatos')  # Redireciona para limpar o formulário
+    else:
+        form = ContatoForm()
+
+    return render(request, 'app01/contatos.html', {'form': form})

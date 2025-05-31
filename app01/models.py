@@ -38,3 +38,11 @@ class UserProfile(models.Model):
         return f"{self.user.username}'s Profile"
 
 
+class Contato(models.Model):
+    nome = models.CharField(max_length=100)
+    email = models.EmailField()
+    mensagem = models.TextField()
+    data_envio = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.nome} - {self.email}"
