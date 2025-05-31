@@ -4,4 +4,3 @@ from .models import Contato
 
 admin.site.register(Produto)
 admin.site.register(Contato)
-

@@ -26,15 +26,16 @@
                   {% else %}
                     <p>Imagem não disponível</p>
                   {% endif %}
-              
                     <h5 class="card-title" style="max-width: 200px; height: auto; display: block; margin: auto">{{ produto.nome }}</h5>
                     <p class="card-text flex-grow-1">{{ produto.descricao }}</p>
                     <div class="mt-auto">
                         <p class="text-success fw-bold mb-2" style="max-width: 200px; height: auto; display: block; margin: auto">R$ {{ produto.preco }}</p>
-                        <!-- From Uiverse.io by Navarog21 --> 
-<button>
-    Comprar
-</button>
+                        <button class="btn-23">
+                            <span class="text">Comprar</span>
+                            <span aria-hidden="" class="marquee">Comprar</span>
+                          </button>
+
+  
                     </div>
                 </div>
             </div>

@@ -6,6 +6,7 @@ from django.conf import settings
 import os
 from django.contrib import messages
 
+
 def home(request):
     return render(request, 'app01/home.html')
 def contatos(request):
@@ -58,6 +59,7 @@ def upload_profile(request):
     else:
         form = ProfileForm()
     return render(request, 'app01/upload_profile.html', {'form': form})
+
 
 def contatos(request):
     if request.method == 'POST':
