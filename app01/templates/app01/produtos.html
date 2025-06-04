@@ -1,0 +1,52 @@
+{% extends 'app01/base.html' %}
+
+{% block title %}Nossos Produtos{% endblock %}
+
+{% block content %}
+
+<!-- Header personalizado para produtos -->
+{% with "Nossos Produtos" as header_title %}
+{% with "Conheça nossa linha completa" as header_subtitle %}
+    {% include 'app01/partials/_header.html' %}
+{% endwith %}
+{% endwith %}
+
+
+
+
+
+<div class="container mt-4">
+    <div class="row">
+        {% for produto in produtos %}
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body d-flex flex-column">
+                    {% if produto.imagem %}
+                    <img src="{{ produto.imagem.url }}" alt="{{ produto.nome }}" style="max-width: 200px; height: auto; display: block; margin: auto">
+                  {% else %}
+                    <p>Imagem não disponível</p>
+                  {% endif %}
+                    <h5 class="card-title" style="max-width: 200px; height: auto; display: block; margin: auto">{{ produto.nome }}</h5>
+                    <p class="card-text flex-grow-1">{{ produto.descricao }}</p>
+                    <div class="mt-auto">
+                        <p class="text-success fw-bold mb-2" style="max-width: 200px; height: auto; display: block; margin: auto">R$ {{ produto.preco }}</p>
+                        <button class="btn-23">
+                            <span class="text">Comprar</span>
+                            <span aria-hidden="" class="marquee">Comprar</span>
+                          </button>
+
+  
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-12">
+            <div class="alert alert-warning">
+                Nenhum produto disponível no momento.
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
